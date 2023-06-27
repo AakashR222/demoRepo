@@ -33,17 +33,15 @@ module.exports = (sequelize, DataTypes) => {
             user.email = user.email.toLowerCase().trim()
         }
     },
-    },
-    hooks:{
-      beforeUpdate: async (user) => {
-        if (user.password) {
-            const salt = bcrypt.genSaltSync(10);
-            user.password = bcrypt.hashSync(user.password, salt);
-        }
-        if (user.email) {
-            delete user.email
-        }
-    },
+    beforeUpdate: async (user) => {
+      if (user.password) {
+          const salt = bcrypt.genSaltSync(10);
+          user.password = bcrypt.hashSync(user.password, salt);
+      }
+      if (user.email) {
+          delete user.email
+      }
+  },
     }
   },
   
